@@ -1,9 +1,6 @@
 //! FHIR types generation.
 
-use std::{
-	any::{Any, TypeId},
-	collections::HashMap,
-};
+use std::collections::HashMap;
 
 use anyhow::Result;
 use inflector::Inflector;

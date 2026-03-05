@@ -43,8 +43,6 @@ macro_rules! for_all_versions {
 	};
 }
 
-/// f64 types within a #[serde(flatten)]'d struct need to be deserialized by first going through a
-/// Value before it is turned into a float. This is an issue within serde_json.
 // struct Float64Visitor;
 // impl<'de> Visitor<'de> for Float64Visitor {
 //     type Value = f64;
@@ -68,21 +66,23 @@ macro_rules! for_all_versions {
 //     //   - visit_u64
 // }
 
-// #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-// pub struct Float64(pub f64);
-//
-// impl<'de> Deserialize<'de> for Float64 {
-// 	fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-// 	where
-// 		D: Deserializer<'de>,
-// 	{
-// 		f64::deserialize(deserializer).unwrap_or_else(|| {
-//
-//         })
-// 		serde_json::from_value(serde_json::Value::deserialize(deserializer)?)
-// 			.map_err(D::Error::custom)
-// 	}
-// }
+/// f64 types within a #[serde(flatten)]'d struct need to be deserialized by first going through a
+/// Value before it is turned into a float. This is an issue within serde_json.
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
+pub struct Float64(pub f64);
+
+impl<'de> Deserialize<'de> for Float64 {
+	fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+	where
+		D: Deserializer<'de>,
+	{
+		// f64::deserialize(deserializer).unwrap_or_else(|| {
+		//
+		//       })
+		serde_json::from_value(serde_json::Value::deserialize(deserializer)?)
+			.map_err(D::Error::custom)
+	}
+}
 
 /// FHIR `integer64` type. Wraps an i64, but serializes and deserializes as
 /// string.
@@ -167,7 +167,7 @@ macro_rules! wrapper_impls {
 	};
 }
 
-// wrapper_impls!(Float64, f64);
+wrapper_impls!(Float64, f64);
 wrapper_impls!(Integer64, i64);
 wrapper_impls!(Base64Binary, Vec<u8>);
 wrapper_impls!(Time, time::Time);
