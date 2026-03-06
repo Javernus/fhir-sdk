@@ -60,7 +60,10 @@ impl<'de> Deserialize<'de> for Float64 {
 	where
 		D: Deserializer<'de>,
 	{
-		serde::Deserialize::deserialize(deserializer).map(Self)
+		// serde::Deserialize::deserialize(deserializer).map(Self)
+		let buffer = String::deserialize(deserializer)?;
+
+		Self::deserialize(buffer.into_deserializer()).map_err(D::Error::custom)
 		// f64::deserialize(deserializer).unwrap_or_else(|| {
 		//
 		//       })
@@ -161,7 +164,7 @@ macro_rules! wrapper_impls {
 	};
 }
 
-wrapper_impls!(Float64, f64);
+wrapper_impls!(Float64, rust_decimal::Decimal);
 wrapper_impls!(Integer64, i64);
 wrapper_impls!(Base64Binary, Vec<u8>);
 wrapper_impls!(Time, time::Time);
