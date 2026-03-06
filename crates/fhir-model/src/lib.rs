@@ -21,7 +21,7 @@ use std::ops::{Deref, DerefMut};
 
 use base64::prelude::{BASE64_STANDARD, Engine};
 use rust_decimal::Decimal;
-use serde::{Deserialize, Deserializer, Serialize, de::Error};
+use serde::{Deserialize, Deserializer, Serialize};
 pub use time;
 
 pub use self::{date_time::*, error::*, references::*};
@@ -41,32 +41,41 @@ macro_rules! for_all_versions {
 	};
 }
 
-// /// f64 types within a #[serde(flatten)]'d struct need to be deserialized by first going through a
-// /// Value before it is turned into a float. This is an issue within serde_json.
-// #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-// pub struct Float64(pub Decimal);
-//
-// impl Serialize for Float64 {
-// 	fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-// 	where
-// 		S: serde::Serializer,
-// 	{
-// 		self.0.serialize(serializer)
-// 	}
-// }
-//
-// impl<'de> Deserialize<'de> for Float64 {
-// 	fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-// 	where
-// 		D: Deserializer<'de>,
-// 	{
-//                 Decimal::deserialize(deserializer).map(Self)
-// 		// f64::deserialize(deserializer).unwrap_or_else(|| {
-// 		//
-// 		//       })
-// 		serde_json::from_value(serde_json::Value::deserialize(deserializer)?)
-// 			.map_err(D::Error::custom)
-// 	}
+/// f64 types within a #[serde(flatten)]'d struct need to be deserialized by first going through a
+/// Value before it is turned into a float. This is an issue within serde_json.
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
+pub struct Float64(pub Decimal);
+
+impl Serialize for Float64 {
+	fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+	where
+		S: serde::Serializer,
+	{
+		serde::Serialize::serialize(&self.0, serializer)
+	}
+}
+
+impl<'de> Deserialize<'de> for Float64 {
+	fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+	where
+		D: Deserializer<'de>,
+	{
+		serde::Deserialize::deserialize(deserializer).map(Self)
+		// f64::deserialize(deserializer).unwrap_or_else(|| {
+		//
+		//       })
+		// serde_json::from_value(serde_json::Value::deserialize(deserializer)?)
+		// 	.map_err(D::Error::custom)
+	}
+}
+// pub fn deserialize_via_str<'de, D, T>(deserializer: D) -> Result<T, D::Error>
+// where
+// 	D: Deserializer<'de>,
+// 	T: DeserializeOwned,
+// {
+// 	// Buffer as a string to preserve every digit for Decimal types
+// 	let buffer = String::deserialize(deserializer)?;
+// 	T::deserialize(buffer.into_deserializer()).map_err(D::Error::custom)
 // }
 
 /// FHIR `integer64` type. Wraps an i64, but serializes and deserializes as
@@ -152,7 +161,7 @@ macro_rules! wrapper_impls {
 	};
 }
 
-// wrapper_impls!(Float64, f64);
+wrapper_impls!(Float64, f64);
 wrapper_impls!(Integer64, i64);
 wrapper_impls!(Base64Binary, Vec<u8>);
 wrapper_impls!(Time, time::Time);

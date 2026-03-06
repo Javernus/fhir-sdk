@@ -6,8 +6,7 @@ use serde::{Serialize, Deserialize};
 use derive_builder::Builder;
 use super::super::codes;
 #[allow(unused_imports, reason = "Generated code; Integer64 is unused in R4B")]
-use crate::{Base64Binary, Date, DateTime, Instant, Time, Integer64};
-use rust_decimal::Decimal;
+use crate::{Base64Binary, Date, DateTime, Instant, Time, Integer64, Float64};
 /** Base StructureDefinition for Address Type: An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world.
 
  **[Address](http://hl7.org/fhir/StructureDefinition/Address) v4.3.0**
@@ -290,7 +289,7 @@ pub struct AgeInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /** **[QuantityComparator](http://hl7.org/fhir/ValueSet/quantity-comparator); < | <= | >= | > - how to understand the value**
 
  How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<" , then the real value is < stated value.
@@ -1518,7 +1517,7 @@ pub struct CountInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /** **[QuantityComparator](http://hl7.org/fhir/ValueSet/quantity-comparator); < | <= | >= | > - how to understand the value**
 
  How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<" , then the real value is < stated value.
@@ -2133,7 +2132,7 @@ pub struct DistanceInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /** **[QuantityComparator](http://hl7.org/fhir/ValueSet/quantity-comparator); < | <= | >= | > - how to understand the value**
 
  How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<" , then the real value is < stated value.
@@ -2693,7 +2692,7 @@ pub struct DurationInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /** **[QuantityComparator](http://hl7.org/fhir/ValueSet/quantity-comparator); < | <= | >= | > - how to understand the value**
 
  How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<" , then the real value is < stated value.
@@ -3708,7 +3707,7 @@ pub enum ElementDefinitionDefaultValue {
     DateTime(DateTime),
     /// Variant accepting the Decimal type.
     #[serde(rename = "defaultValueDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Id type.
     #[serde(rename = "defaultValueId")]
     Id(String),
@@ -4024,7 +4023,7 @@ pub enum ElementDefinitionFixed {
     DateTime(DateTime),
     /// Variant accepting the Decimal type.
     #[serde(rename = "fixedDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Id type.
     #[serde(rename = "fixedId")]
     Id(String),
@@ -4340,7 +4339,7 @@ pub enum ElementDefinitionPattern {
     DateTime(DateTime),
     /// Variant accepting the Decimal type.
     #[serde(rename = "patternDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Id type.
     #[serde(rename = "patternId")]
     Id(String),
@@ -4720,7 +4719,7 @@ pub enum ElementDefinitionExampleValue {
     DateTime(DateTime),
     /// Variant accepting the Decimal type.
     #[serde(rename = "valueDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Id type.
     #[serde(rename = "valueId")]
     Id(String),
@@ -5030,7 +5029,7 @@ pub enum ElementDefinitionMinValue {
     Time(Time),
     /// Variant accepting the Decimal type.
     #[serde(rename = "minValueDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Integer type.
     #[serde(rename = "minValueInteger")]
     Integer(i32),
@@ -5094,7 +5093,7 @@ pub enum ElementDefinitionMaxValue {
     Time(Time),
     /// Variant accepting the Decimal type.
     #[serde(rename = "maxValueDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Integer type.
     #[serde(rename = "maxValueInteger")]
     Integer(i32),
@@ -5723,7 +5722,7 @@ pub enum ExtensionValue {
     DateTime(DateTime),
     /// Variant accepting the Decimal type.
     #[serde(rename = "valueDecimal")]
-    Decimal(Decimal),
+    Decimal(Float64),
     /// Variant accepting the Id type.
     #[serde(rename = "valueId")]
     Id(String),
@@ -6753,7 +6752,7 @@ pub struct MoneyInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_value")]
@@ -7829,7 +7828,7 @@ pub struct QuantityInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_value")]
@@ -8665,7 +8664,7 @@ pub struct SampledDataInner {
 
  This is usually a whole number. */
     #[serde(rename = "period")]
-    pub period: Decimal,
+    pub period: Float64,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_period")]
@@ -8679,7 +8678,7 @@ pub struct SampledDataInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "factor")]
-    pub factor: Option<Decimal>,
+    pub factor: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_factor")]
@@ -8693,7 +8692,7 @@ pub struct SampledDataInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "lowerLimit")]
-    pub lower_limit: Option<Decimal>,
+    pub lower_limit: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_lowerLimit")]
@@ -8707,7 +8706,7 @@ pub struct SampledDataInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "upperLimit")]
-    pub upper_limit: Option<Decimal>,
+    pub upper_limit: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_upperLimit")]
@@ -9163,7 +9162,7 @@ pub struct TimingRepeat {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "duration")]
-    pub duration: Option<Decimal>,
+    pub duration: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_duration")]
@@ -9177,7 +9176,7 @@ pub struct TimingRepeat {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "durationMax")]
-    pub duration_max: Option<Decimal>,
+    pub duration_max: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_durationMax")]
@@ -9233,7 +9232,7 @@ pub struct TimingRepeat {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "period")]
-    pub period: Option<Decimal>,
+    pub period: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_period")]
@@ -9247,7 +9246,7 @@ pub struct TimingRepeat {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "periodMax")]
-    pub period_max: Option<Decimal>,
+    pub period_max: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_periodMax")]
@@ -9745,7 +9744,7 @@ pub struct MoneyQuantityInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_value")]
@@ -9898,7 +9897,7 @@ pub struct SimpleQuantityInner {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(feature = "builders", builder(default, setter(strip_option)))]
     #[serde(rename = "value")]
-    pub value: Option<Decimal>,
+    pub value: Option<Float64>,
     /// Extension field.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[serde(rename = "_value")]
